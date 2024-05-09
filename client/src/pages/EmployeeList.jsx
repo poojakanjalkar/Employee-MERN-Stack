@@ -20,6 +20,7 @@ import {
 } from "reactstrap";
 import Header from "../components/Headers/Header";
 import AddEmployee from "./AddEmployee";
+import UpdateEmployee from "./UpdateEmployee";
 
 export default function EmployeeList() {
 
@@ -37,11 +38,46 @@ export default function EmployeeList() {
   // }]
 
   const [employees, setEmployees] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editData, setEditData] = useState();
 
+  const [editModal, setEditModal] = useState(false);
+  const toggleEditModal = () => setEditModal(!editModal);
+
+  let id = 0
   const handleAddEmployee = (employee) => {
+    id += 1
     console.log("+++++++++++++", employee)
+    employee.id = id
     setEmployees([...employees, employee]);
   };
+
+  const updateArrayData = (employee) => {
+    console.log("---employees----", employees)
+    console.log("---employee----", employee)
+    id += 1
+    console.log("+++++++++++++", employee)
+    employee.id = id
+    return employees.map(item => {
+      if (employee.id === item.id) {
+        return { ...item, ...employee };
+      }
+      return item;
+    });
+  };
+
+  const handleUpdateEmployee = (employee) => {
+
+
+
+    setEmployees(updateArrayData(employee))
+
+    // setEditData([...employees, employee])
+  }
+
+  const handleDeleteButton = () => {
+    console.log("----Deleted----")
+  }
 
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
@@ -49,6 +85,8 @@ export default function EmployeeList() {
     <>
       <Header />
       <AddEmployee toggle={toggleModal} modal={modal} onSubmit={handleAddEmployee} />
+      <UpdateEmployee toggleEditModal={toggleEditModal} editModal={editModal} onSubmit={handleUpdateEmployee}
+        editData={editData} />
       <Container className="mt--7" fluid>
         <Row>
           <div className="col">
@@ -87,6 +125,9 @@ export default function EmployeeList() {
                       <th>Courses</th>
                       <th>Create Date</th>
                       <th>Action</th>
+
+
+
                     </tr>
                   </thead>
                   <tbody>
@@ -101,9 +142,26 @@ export default function EmployeeList() {
                         <td>{employee.mobile}</td>
                         <td>{employee.designation}</td>
                         <td>{employee.gender}</td>
-                        <td>{employee.courses.join(', ')}</td>
+                        <td>{employee.courses}</td>
                         <td>{employee.createDate}</td>
-                        <td>{employee.action}</td>
+                        <td>
+                          <Button
+                            className="my-1"
+                            color="primary"
+                            // onClick={() => handleUpdateEmployee(employee)}
+                            onClick={toggleEditModal}
+                            type="button"
+                          >
+                            Edit
+                          </Button>{' '}
+                          <Button
+                            className="my-1"
+                            color="primary"
+                            onClick={() => handleDeleteButton()}
+                            type="button"
+                          >
+                            Delete
+                          </Button></td>
                       </tr>
                     ))}
                   </tbody>
