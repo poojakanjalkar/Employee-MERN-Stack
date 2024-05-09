@@ -12,18 +12,18 @@ export default function App() {
       element: <Login />,
     },
     {
-      path: '/Home',
+      path: '/home',
       element: <HomeLayout />,
       children: [{
         index: true,
         element: <DashboardLayout />
       },
       {
-        path: 'Employee-List',
+        path: 'employee',
         element: <EmployeeList />,
       },
       {
-        path: 'AddEmployee',
+        path: 'addEmployee',
         element: <AddEmployee />
       }
       ]
