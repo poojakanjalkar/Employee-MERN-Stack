@@ -21,23 +21,20 @@ import {
 import Header from "../components/Headers/Header";
 
 export default function EmployeeList() {
+
+  const empList = [{
+    uniqueId: 1,
+    image: "https://example.com/image.jpg",
+    name: "John Doe",
+    email: "john.doe@example.com",
+    mobile: "123-456-7890",
+    designation: "Software Engineer",
+    gender: "Male",
+    course: "Computer Science",
+    createDate: "2024-05-09",
+    action: "test"
+  }]
   return (
-    // <Table striped>
-    //   <thead>
-    //     <tr>
-    //       <th>#</th>
-    //       <th>Image</th>
-    //       <th>Name</th>
-    //       <th>Email</th>
-    //       <th>Mobile No.</th>
-    //       <th>Designation</th>
-    //       <th>Gender</th>
-    //       <th>Course</th>
-    //       <th>Create Date</th>
-    //       <th>Action</th>
-    //     </tr>
-    //   </thead>
-    // </Table>
     <>
       <Header />
       <Container className="mt--7" fluid>
@@ -56,7 +53,7 @@ export default function EmployeeList() {
                       // onClick={toggleModal}
                       type="button"
                     >
-                      {"Add Device"}
+                      {"Create Employee"}
                     </Button>
                   </Col>
                 </FormGroup>
@@ -80,6 +77,24 @@ export default function EmployeeList() {
                       <th>Action</th>
                     </tr>
                   </thead>
+                  <tbody>
+                    {empList.map((employee, index) => (
+                      <tr key={index}>
+                        <th scope="row">{index + 1}</th>
+                        <td>
+                          <img src={employee.image} alt="Employee" style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
+                        </td>
+                        <td>{employee.name}</td>
+                        <td>{employee.email}</td>
+                        <td>{employee.mobile}</td>
+                        <td>{employee.designation}</td>
+                        <td>{employee.gender}</td>
+                        <td>{employee.course}</td>
+                        <td>{employee.createDate}</td>
+                        <td>{employee.action}</td>
+                      </tr>
+                    ))}
+                  </tbody>
                 </Table>
               </CardHeader>
             </Card>
