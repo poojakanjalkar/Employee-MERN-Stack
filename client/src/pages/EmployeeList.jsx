@@ -19,24 +19,36 @@ import {
   Col,
 } from "reactstrap";
 import Header from "../components/Headers/Header";
+import AddEmployee from "./AddEmployee";
 
 export default function EmployeeList() {
 
-  const empList = [{
-    uniqueId: 1,
-    image: "https://example.com/image.jpg",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    mobile: "123-456-7890",
-    designation: "Software Engineer",
-    gender: "Male",
-    course: "Computer Science",
-    createDate: "2024-05-09",
-    action: "test"
-  }]
+  // const empList = [{
+  //   uniqueId: 1,
+  //   image: "https://example.com/image.jpg",
+  //   name: "John Doe",
+  //   email: "john.doe@example.com",
+  //   mobile: "123-456-7890",
+  //   designation: "Software Engineer",
+  //   gender: "Male",
+  //   course: "Computer Science",
+  //   createDate: "2024-05-09",
+  //   action: "test"
+  // }]
+
+  const [employees, setEmployees] = useState([]);
+
+  const handleAddEmployee = (employee) => {
+    console.log("+++++++++++++", employee)
+    setEmployees([...employees, employee]);
+  };
+
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => setModal(!modal);
   return (
     <>
       <Header />
+      <AddEmployee toggle={toggleModal} modal={modal} onSubmit={handleAddEmployee} />
       <Container className="mt--7" fluid>
         <Row>
           <div className="col">
@@ -44,13 +56,13 @@ export default function EmployeeList() {
               <CardHeader className="border-0">
                 <FormGroup row>
                   <Col sm={9}>
-                    <h3 className="mb-0">Employee List</h3>
+                    <span><h3 className="mb-0">Employee List</h3></span>
                   </Col>
                   <Col sm={3}>
                     <Button
                       className="my-1"
                       color="primary"
-                      // onClick={toggleModal}
+                      onClick={toggleModal}
                       type="button"
                     >
                       {"Create Employee"}
@@ -72,13 +84,13 @@ export default function EmployeeList() {
                       <th>Mobile No.</th>
                       <th>Designation</th>
                       <th>Gender</th>
-                      <th>Course</th>
+                      <th>Courses</th>
                       <th>Create Date</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {empList.map((employee, index) => (
+                    {employees.map((employee, index) => (
                       <tr key={index}>
                         <th scope="row">{index + 1}</th>
                         <td>
@@ -89,7 +101,7 @@ export default function EmployeeList() {
                         <td>{employee.mobile}</td>
                         <td>{employee.designation}</td>
                         <td>{employee.gender}</td>
-                        <td>{employee.course}</td>
+                        <td>{employee.courses.join(', ')}</td>
                         <td>{employee.createDate}</td>
                         <td>{employee.action}</td>
                       </tr>
