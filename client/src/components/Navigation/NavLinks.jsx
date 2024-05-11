@@ -10,6 +10,10 @@ export default function NavLinks(props) {
     <li>
       <NavLink to='/home/employee'>Employee List</NavLink>
     </li>
+    <li className='btn-container'>
+      <NavLink to="/">Logout</NavLink>
+    </li>
+
   </ul>
 
 
