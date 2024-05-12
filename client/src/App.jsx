@@ -4,6 +4,7 @@ import HomeLayout from './pages/HomeLayout';
 import Login from './pages/Login';
 import EmployeeList from './pages/EmployeeList';
 import AddEmployee from './pages/AddEmployee';
+import LogoutButton from './pages/Logout';
 export default function App() {
 
   const router = createBrowserRouter([
@@ -25,6 +26,10 @@ export default function App() {
       {
         path: 'addEmployee',
         element: <AddEmployee />
+      },
+      {
+        path: 'logout',
+        element: <LogoutButton />
       }
       ]
     }
